@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <title>Tipos de Computador</title>
 </head>
+
 <body>
     <h1>Vamos falar sobre os tipos de computadores.</h1>
     <div class="container">
         <h1>Tipos de Computadores</h1>
-        <p>Os computadores podem ser classificados de diversas maneiras, principalmente pelo seu tamanho, portabilidade e capacidade de processamento.</p>
+        <p>Os computadores podem ser classificados de diversas maneiras, principalmente pelo seu tamanho, portabilidade
+            e capacidade de processamento.</p>
 
         <h2>Classificação Comum (Baseada no Uso Pessoal/Tamanho)</h2>
         <ul>
             <li>
                 <strong>Desktop (Computador de Mesa / PC):</strong>
-                <span class="tipo-descricao">O mais tradicional, com gabinete, monitor, teclado e mouse separados. Ideal para uso fixo em casa ou escritório.</span>
+                <span class="tipo-descricao">O mais tradicional, com gabinete, monitor, teclado e mouse separados. Ideal
+                    para uso fixo em casa ou escritório.</span>
             </li>
             <li>
                 <strong>Notebook (Laptop):</strong>
-                <span class="tipo-descricao">Portátil, com todos os componentes integrados e bateria interna. Projetado para fácil transporte.</span>
+                <span class="tipo-descricao">Portátil, com todos os componentes integrados e bateria interna. Projetado
+                    para fácil transporte.</span>
             </li>
             <li>
                 <strong>All-in-One (Tudo-em-Um):</strong>
-                <span class="tipo-descricao">Um tipo de desktop compacto onde todos os componentes internos são integrados à tela.</span>
+                <span class="tipo-descricao">Um tipo de desktop compacto onde todos os componentes internos são
+                    integrados à tela.</span>
             </li>
             <li>
                 <strong>Smartphones e Tablets:</strong>
-                <span class="tipo-descricao">Dispositivos móveis com poder computacional significativo para diversas tarefas.</span>
+                <span class="tipo-descricao">Dispositivos móveis com poder computacional significativo para diversas
+                    tarefas.</span>
             </li>
         </ul>
 
@@ -36,19 +43,23 @@
         <ul>
             <li>
                 <strong>Servidor:</strong>
-                <span class="tipo-descricao">Computador de alta performance usado para gerenciar recursos e dados em uma rede.</span>
+                <span class="tipo-descricao">Computador de alta performance usado para gerenciar recursos e dados em uma
+                    rede.</span>
             </li>
             <li>
                 <strong>Supercomputador:</strong>
-                <span class="tipo-descricao">Máquinas com altíssima velocidade de processamento, usadas para cálculos científicos e de engenharia complexos.</span>
+                <span class="tipo-descricao">Máquinas com altíssima velocidade de processamento, usadas para cálculos
+                    científicos e de engenharia complexos.</span>
             </li>
             <li>
                 <strong>Ultrabook:</strong>
-                <span class="tipo-descricao">Notebooks muito finos e leves, geralmente com foco em alto desempenho e mobilidade.</span>
+                <span class="tipo-descricao">Notebooks muito finos e leves, geralmente com foco em alto desempenho e
+                    mobilidade.</span>
             </li>
             <li>
                 <strong>Netbook:</strong>
-                <span class="tipo-descricao">Computadores pequenos e de capacidade reduzida, focados principalmente no acesso à internet.</span>
+                <span class="tipo-descricao">Computadores pequenos e de capacidade reduzida, focados principalmente no
+                    acesso à internet.</span>
             </li>
         </ul>
 
@@ -56,13 +67,28 @@
         <ul>
             <li>
                 <strong>Digital:</strong>
-                <span class="tipo-descricao">Entendem e processam dados como sinais digitais (zeros e uns). É a maioria dos computadores atuais.</span>
+                <span class="tipo-descricao">Entendem e processam dados como sinais digitais (zeros e uns). É a maioria
+                    dos computadores atuais.</span>
             </li>
             <li>
                 <strong>Analógico:</strong>
-                <span class="tipo-descricao">Utilizam processos mecânicos, hidráulicos ou elétricos contínuos para representar dados (ex: modelos antigos com engrenagens).</span>
+                <span class="tipo-descricao">Utilizam processos mecânicos, hidráulicos ou elétricos contínuos para
+                    representar dados (ex: modelos antigos com engrenagens).</span>
             </li>
         </ul>
     </div>
-    </body>
+    <form action="/submit-form" method="POST">
+
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required placeholder="Email">
+        <br><br>
+
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required placeholder="Telefone" pattern="[0-9\(\)\-\s]+">
+        <br><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+
 </html>
