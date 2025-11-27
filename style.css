@@ -1,160 +1,240 @@
-/* --- Reset Básico e Padrões Globais --- */
+/* Reset básico e fontes */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Garante que padding e borda não afetem o tamanho final */
 }
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f0f2f5; /* Um cinza claro para o fundo */
+    background-color: #f4f7f6;
     color: #333;
     line-height: 1.6;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1,
+h2,
+h3 {
+    margin-bottom: 15px;
+    color: #1a535c;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 2px solid #ff6b6b;
+    padding-bottom: 5px;
+}
+
+/* --- Layout dos Cards --- */
+.card-container {
+    display: grid;
+    /* Cria colunas responsivas: 
+       - Tenta encaixar colunas de 300px
+       - Se não couber, elas se ajustam (1fr)
+    */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    /* Espaçamento entre os cards */
+    margin-top: 30px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    /* Garante que a imagem não vaze */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza todo o conteúdo */
-    padding: 20px; /* Espaçamento nas laterais */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* --- Títulos Principais --- */
-/* O H1 fora do container */
-body > h1 {
-    font-size: 2.2rem;
-    color: #444;
-    margin-bottom: 25px;
-    text-align: center;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* --- Container Principal de Conteúdo --- */
-.container {
+.card img {
     width: 100%;
-    max-width: 900px; /* Define uma largura máxima para leitura */
-    background-color: #ffffff; /* Fundo branco para o conteúdo */
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Sombra suave */
-    padding: 30px;
-    margin-bottom: 30px; /* Espaço antes do formulário */
+    height: 180px;
+    object-fit: cover;
+    /* Garante que a imagem cubra o espaço */
 }
 
-/* Título dentro do container */
-.container h1 {
-    font-size: 1.8rem;
-    color: #0056b3; /* Um tom de azul para destaque */
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee; /* Linha sutil de separação */
+.card h3 {
+    padding: 15px 20px 0 20px;
+    color: #1a535c;
 }
 
-.container h2 {
-    font-size: 1.4rem;
-    color: #111;
-    margin-top: 25px;
-    margin-bottom: 15px;
+.card .tipo-resumo {
+    padding: 0 20px 20px 20px;
+    flex-grow: 1;
+    /* Faz o texto crescer para empurrar o botão para baixo */
 }
 
-.container p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-/* --- Estilização das Listas --- */
-ul {
-    list-style: none; /* Remove os marcadores padrão */
-}
-
-li {
-    background-color: #fdfdfd; /* Fundo ligeiramente diferente para cada item */
-    border: 1px solid #e9e9e9;
-    border-radius: 6px;
-    padding: 16px;
-    margin-bottom: 12px;
-    transition: box-shadow 0.2s ease-in-out;
-}
-
-li:hover {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Efeito sutil ao passar o mouse */
-}
-
-li strong {
-    display: block; /* Faz o <strong> ocupar uma linha */
-    font-size: 1.15rem;
-    color: #004a99; /* Azul mais escuro para o título do item */
-    margin-bottom: 5px;
-}
-
-.tipo-descricao {
-    font-size: 0.95rem;
-    color: #555; /* Cor mais suave para a descrição */
-}
-
-/* --- Estilização do Formulário --- */
-form {
-    width: 100%;
-    max-width: 900px; /* Mesma largura do container */
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    padding: 30px;
-}
-
-form label {
-    display: block; /* Coloca o label acima do campo */
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #444;
-}
-
-form input[type="email"],
-form input[type="tel"] {
-    width: 100%; /* Ocupa 100% da largura do formulário */
+.card button.btn-modal {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 20px 20px 20px;
     padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 20px; /* Espaço entre os campos */
-}
-
-/* Destaque ao focar no campo (Acessibilidade) */
-form input[type="email"]:focus,
-form input[type="tel"]:focus {
-    border-color: #0056b3;
-    outline: none; /* Remove a borda padrão do navegador */
-    box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
-}
-
-form button[type="submit"] {
-    width: 100%; /* Botão com largura total */
-    padding: 12px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #0056b3; /* Cor primária azul */
+    background-color: #ff6b6b;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.card button.btn-modal:hover {
+    background-color: #e63946;
+}
+
+
+/* --- Estilo do Formulário --- */
+form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 40px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="email"],
+form input[type="tel"],
+form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+form textarea {
+    resize: vertical;
+    /* Permite redimensionar só na vertical */
+}
+
+form button[type="submit"] {
+    background-color: #1a535c;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
     transition: background-color 0.3s ease;
 }
 
 form button[type="submit"]:hover {
-    background-color: #004a99; /* Tom mais escuro ao passar o mouse */
+    background-color: #0d3b42;
 }
 
-/* --- Ajustes para telas menores (Responsividade) --- */
-@media (max-width: 600px) {
-    body {
-        padding: 10px; /* Menos espaço nas laterais */
+/* Mensagens de status do formulário */
+#form-status {
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.status-success {
+    color: green;
+}
+
+.status-error {
+    color: #e63946;
+}
+
+
+/* --- Estilo do Modal --- */
+.modal-overlay {
+    /* Oculto por padrão */
+    display: none;
+
+    position: fixed;
+    /* Fica por cima de tudo */
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Fundo escuro semi-transparente */
+
+    /* Para centralizar o conteúdo */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Classe que o JS vai adicionar para mostrar */
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slide-down 0.4s ease-out;
+}
+
+.modal-content img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+}
+
+/* Animação simples para o modal */
+@keyframes slide-down {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
     }
 
-    .container,
-    form {
-        padding: 20px; /* Menos espaço interno */
-    }
-
-    body > h1 {
-        font-size: 1.8rem;
-    }
-
-    .container h1 {
-        font-size: 1.5rem;
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
