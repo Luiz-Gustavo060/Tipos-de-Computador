@@ -1,58 +1,85 @@
-/**
- * VALIDAÇÃO DE E-MAIL
- * Usa uma Expressão Regular (Regex) para checar o formato básico do e-mail.
- * @param {string} email - O valor do campo de e-mail.
- * @returns {boolean} - Retorna true se o e-mail for válido, false caso contrário.
- */
-function validarEmail(email) {
+// Espera o documento HTML ser totalmente carregado para executar o script
+document.addEventListener('DOMContentLoaded', () => {
 
-    const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    /* --- LÓGICA DO MODAL --- */
 
-    const emailLimpo = email.trim();
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalImg = document.getElementById('modal-img');
+    const modalDesc = document.getElementById('modal-desc');
+    const closeBtn = document.querySelector('.close-btn');
+    const modalButtons = document.querySelectorAll('.btn-modal');
 
-    return regexEmail.test(emailLimpo);
-}
+    // Adiciona um evento de clique para CADA botão "Saiba Mais"
+    modalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 1. Pega o "card" pai do botão que foi clicado
+            const card = button.closest('.card');
 
+            // 2. Pega as informações de dentro desse card
+            const title = card.querySelector('h3').innerText;
+            const imgSrc = card.querySelector('img').src;
+            const fullDesc = card.querySelector('.tipo-descricao-completa').innerHTML;
 
-/**
- * VALIDAÇÃO DE TELEFONE
- * Esta função valida um formato de telefone comum no Brasil, permitindo opcionalmente
- * parênteses, espaços e traços, focando no total de 10 ou 11 dígitos (com ou sem o 9º dígito).
- *
- * @param {string} telefone - O valor do campo de telefone (pode estar formatado).
- * @returns {boolean}
- */
-function validarTelefone(telefone) {
-    if (!telefone) {
-        return false;
-    }
+            // 3. Coloca essas informações dentro do modal
+            modalTitle.innerText = title;
+            modalImg.src = imgSrc;
+            modalDesc.innerHTML = fullDesc;
 
-    const apenasDigitos = telefone.replace(/[^\d+]/g, '');
+            // 4. Mostra o modal (adicionando a classe 'show')
+            modal.classList.add('show');
+        });
+    });
 
-    let comprimentoValido = false;
+    // Função para fechar o modal
+    const closeModal = () => {
+        modal.classList.remove('show');
+    };
 
-    if (apenasDigitos.startsWith('+')) {
+    // Adiciona evento de clique no botão "X" para fechar
+    closeBtn.addEventListener('click', closeModal);
 
-        if (apenasDigitos.length >= 10 && apenasDigitos.length <= 15) {
-            comprimentoValido = true;
+    // Adiciona evento de clique no FUNDO (overlay) para fechar
+    modal.addEventListener('click', (event) => {
+        // Fecha o modal apenas se o clique foi no fundo (overlay)
+        // e não no conteúdo (modal-content)
+        if (event.target === modal) {
+            closeModal();
         }
-    } else {
+    });
 
-        if (apenasDigitos.length === 10 || apenasDigitos.length === 11) {
-            comprimentoValido = true;
+    /* --- LÓGICA DO FORMULÁRIO --- */
+
+    const form = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+
+    form.addEventListener('submit', (event) => {
+        // 1. Impede o envio padrão do formulário (que recarregaria a página)
+        event.preventDefault();
+
+        // 2. Pega os valores dos campos
+        const email = form.querySelector('#email').value;
+        const telefone = form.querySelector('#telefone').value;
+        const mensagem = form.querySelector('#mensagem').value;
+
+        // 3. Validação simples
+        if (email === '' || telefone === '' || mensagem === '') {
+            // Mostra mensagem de erro
+            formStatus.innerText = 'Por favor, preencha todos os campos!';
+            formStatus.className = 'status-error'; // Adiciona classe CSS de erro
+        } else {
+            // Mostra mensagem de sucesso
+            formStatus.innerText = 'Mensagem enviada com sucesso!';
+            formStatus.className = 'status-success'; // Adiciona classe CSS de sucesso
+
+            // Limpa o formulário
+            form.reset();
+
+            // (Opcional) Remove a mensagem de sucesso após 3 segundos
+            setTimeout(() => {
+                formStatus.innerText = '';
+                formStatus.className = '';
+            }, 3000);
         }
-    }
-
-    return comprimentoValido;
-}
-
-console.log("--- TESTE DE E-MAIL ---");
-console.log(`teste@exemplo.com: ${validarEmail("teste@exemplo.com")}`);
-console.log(`invalido@: ${validarEmail("invalido@")}`);
-console.log(`outro.teste@dominio.com.br: ${validarEmail("outro.teste@dominio.com.br")}`);
-
-console.log("\n--- TESTE DE TELEFONE (BR) ---");
-console.log(`(62) 98765-4321: ${validarTelefone("(11) 98765-4321")}`);
-console.log(`1133334444: ${validarTelefone("1133334444")}`);
-console.log(`+5511987654321: ${validarTelefone("+5511987654321")}`);
-console.log(`12345: ${validarTelefone("12345")}`);
+    });
+});
